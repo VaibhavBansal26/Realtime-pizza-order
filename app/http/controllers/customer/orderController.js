@@ -44,6 +44,8 @@ function orderController(){
                             return res.json({success:'Payment failed . Order placed successfully - pay cash on delivery'})
                         })
                     }else{
+                        const eventEmitter = req.app.get('eventEmitter')
+                        eventEmitter.emit('orderPlaced',placedOrder)
                         delete req.session.cart
                         return res.json({success:'Order placed successfully - pay cash on delivery'})
                     }
