@@ -18,10 +18,10 @@ const Emitter = require('events')
 //Database Connection
 
 //CONFIG FILE
-const uri = 'mongodb+srv://V_Bansal:kritisanon14@cluster0.hljid.mongodb.net/pizza-app?retryWrites=true&w=majority'
+//const uri = 'mongodb+srv://V_Bansal:kritisanon14@cluster0.hljid.mongodb.net/pizza-app?retryWrites=true&w=majority'
 
 //MONGO DB CONNECTION
-mongoose.connect(uri,{
+mongoose.connect(process.env.MONGO_CONNECTION_URL,{
     useNewUrlParser : true,
     useCreateIndex:true,
     useFindAndModify:false,
@@ -57,7 +57,7 @@ app.use(session({
     resave:false,
     store:MongoDbStore.create({
         client:connection.getClient(),
-        mongoUrl:uri
+        mongoUrl:process.env.MONGO_CONNECTION_URL
     }),
     saveUninitialized:false,
     cookie:{maxAge:1000*60*60*24}
@@ -88,6 +88,9 @@ app.set('view engine','ejs')
 
 //Routes
 require('./routes/web')(app)
+app.use((req,res) =>{
+    res.status(404).render('error/404')
+})
 
 const server = app.listen(PORT,() =>{
     console.log(`Listening on port ${PORT}`)
