@@ -44,6 +44,7 @@ function orderController(){
                             return res.json({success:'Payment failed . Order placed successfully - pay cash on delivery'})
                         })
                     }else{
+                        delete req.session.cart
                         return res.json({success:'Order placed successfully - pay cash on delivery'})
                     }
                     //Event Emitter
