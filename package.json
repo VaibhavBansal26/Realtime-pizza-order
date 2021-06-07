@@ -4,7 +4,7 @@
   "main": "index.js",
   "author": "Vaibhav Bansal",
   "scripts": {
-    "start": "node server.js",
+    "start": "mix",
     "dev": "nodemon server.js",
     "development": "mix",
     "watch": "mix watch",
