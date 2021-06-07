@@ -2,6 +2,15 @@
 const Order = require('../../../models/orderModel')
 const moment = require('moment')
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY)
+const nodemailer = require('nodemailer');
+const sendgridTransport = require('nodemailer-sendgrid-transport');
+
+
+const transporter = nodemailer.createTransport(sendgridTransport({
+    auth:{
+        api_key:process.env.SENDGRID_API_KEY
+    }
+}))
 
 function orderController(){
     return{
@@ -33,6 +42,12 @@ function orderController(){
                             placedOrder.save().then((r)=>{
                                 const eventEmitter = req.app.get('eventEmitter')
                                 eventEmitter.emit('orderPlaced',r)
+                                transporter.sendMail({
+                                    to:req.user.email,
+                                    from:"vaibhav.bansal2020@gmail.com",
+                                    subject:"Signed Up Successfully",
+                                    html:`<h1>Welcome to Pizza App ${req.user.name} </h1> <p>Your order has been placed</p>`
+                                })
                                 delete req.session.cart
                                 return res.json({success:'Payment done. Order placed successfully'})
                             }).catch((err)=>{

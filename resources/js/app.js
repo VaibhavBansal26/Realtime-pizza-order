@@ -5,6 +5,7 @@ import {initAdmin} from './admin'
 import { initStripe } from './stripe';
 
 let addToCart = document .querySelectorAll('.add-to-cart');
+// let DelCart = document.querySelectorAll('.delete-item')
 let cartCounter = document.querySelector('#cartCounter')
 
 function updateCart(pizza){
@@ -25,6 +26,24 @@ function updateCart(pizza){
     })
 }
 
+// function deleteCart(pizza){
+//     axios.post('/delete-cart-item',pizza).then( res => {
+//         console.log(res)
+//         cartCounter.innerText = res.data.totalQty
+//         new Noty({
+//             type:'success',
+//             timeout:1000,
+//             text:'Item added to cart'
+//         }).show();
+//     }).catch(err =>{
+//         new Noty({
+//             type:'error',
+//             timeout:1000,
+//             text:'Something went wrong'
+//         }).show();
+//     })
+// }
+
 
 addToCart.forEach((btn) => {
     btn.addEventListener('click',(e) => {
@@ -33,6 +52,14 @@ addToCart.forEach((btn) => {
         console.log(pizza)
     })
 })
+
+// DelCart.forEach((btn) => {
+//     btn.addEventListener('click',(e) => {
+//         console.log(btn.dataset.pizza)
+//         let pizzas = JSON.parse(btn.dataset.pizza)
+//         deleteCart(pizzas)
+//     })
+// })
 
 const alertMessage = document.querySelector('#success-alert')
 if(alertMessage){

@@ -2,6 +2,15 @@
 @import '~noty/src/noty.scss';
 @import '~noty/src/themes/mint.scss';
 
+body::-webkit-scrollbar {
+    display: none;
+  }
+  
+body {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+  
 
 body{
     font-family:'Lato', sans-serif;
@@ -25,7 +34,11 @@ nav li a{
 }
 
 section.hero{
-    background: $secondary;
+    //background: $secondary;
+    background: url('/img/pngtree.jpg');
+    background-size: cover;
+    background-position: center center;
+    height: 500px;
 }
 
 .size{

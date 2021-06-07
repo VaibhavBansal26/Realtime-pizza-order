@@ -28,7 +28,12 @@ function cartController(){
                 cart.totalPrice = cart.totalPrice + req.body.price
             }
             return res.json({totalQty:req.session.cart.totalQty})
-        }
+        },
+        // delete(req,res){
+        //   
+        //     delete req.session.cart.items[req.body._id]
+        //     res.render('customer/cart')
+        // }
     }
 }
 

@@ -2123,7 +2123,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var addToCart = document.querySelectorAll('.add-to-cart');
+var addToCart = document.querySelectorAll('.add-to-cart'); // let DelCart = document.querySelectorAll('.delete-item')
+
 var cartCounter = document.querySelector('#cartCounter');
 
 function updateCart(pizza) {
@@ -2142,7 +2143,24 @@ function updateCart(pizza) {
       text: 'Something went wrong'
     }).show();
   });
-}
+} // function deleteCart(pizza){
+//     axios.post('/delete-cart-item',pizza).then( res => {
+//         console.log(res)
+//         cartCounter.innerText = res.data.totalQty
+//         new Noty({
+//             type:'success',
+//             timeout:1000,
+//             text:'Item added to cart'
+//         }).show();
+//     }).catch(err =>{
+//         new Noty({
+//             type:'error',
+//             timeout:1000,
+//             text:'Something went wrong'
+//         }).show();
+//     })
+// }
+
 
 addToCart.forEach(function (btn) {
   btn.addEventListener('click', function (e) {
@@ -2150,7 +2168,14 @@ addToCart.forEach(function (btn) {
     updateCart(pizza);
     console.log(pizza);
   });
-});
+}); // DelCart.forEach((btn) => {
+//     btn.addEventListener('click',(e) => {
+//         console.log(btn.dataset.pizza)
+//         let pizzas = JSON.parse(btn.dataset.pizza)
+//         deleteCart(pizzas)
+//     })
+// })
+
 var alertMessage = document.querySelector('#success-alert');
 
 if (alertMessage) {

@@ -17,9 +17,11 @@
             <div>
                 <ul class="flex items-center">
                     <li class="ml-6"><a href="/">Menu</a></li>
-                    <li class="ml-6"><a href="#">Offers</a></li>
-                    <%if(user){%>   
+                    
+                    <%if(user){%> 
+                        <li class="ml-6"><a href="/customer/orders">Orders</a></li>  
                     <li class="ml-6">
+                       
                         <form action="/logout" method="POST" id="logout">
                             <a onclick="document.getElementById('logout').submit()" href="#">Logout</a>
                         </form>
@@ -36,6 +38,7 @@
             </div>
         </nav>
        <%- body %>
+       <!-- <div class="w-full  bottom-0 h-16 bg-black  text-lg text-white  text-center py-4 mt-8">&#169 Vaibhav Bansal 2021</div> -->
        <script src="/socket.io/socket.io.js"></script>
         <script src="/js/app.js"></script>
     </body>

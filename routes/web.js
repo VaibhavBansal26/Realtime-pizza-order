@@ -18,6 +18,7 @@ function initRoutes(app) {
     app.post('/logout',authController().logout)
 
     app.get('/cart',cartController().index)
+    // app.post('/delete-cart-item',cartController().delete)
     app.post('/update-cart',cartController().update)
 
    

@@ -276,6 +276,17 @@
   color: #fff;
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
 body {
   font-family: "Lato", sans-serif;
   font-weight: bold;
@@ -284,21 +295,24 @@ body {
 }
 
 nav li:last-child a {
-  background: #FE5F1E;
+  background: #4cd137;
 }
 nav li:last-child a:hover {
-  background: #b23301;
+  background: #44bd32;
 }
 
 nav li a {
   transition: all 0.4s ease-in-out;
 }
 nav li a:hover {
-  color: #FE5F1E;
+  color: #4cd137;
 }
 
 section.hero {
-  background: #F8F8F8;
+  background: url("/img/pngtree.jpg");
+  background-size: cover;
+  background-position: center center;
+  height: 500px;
 }
 
 .size {
@@ -306,30 +320,30 @@ section.hero {
 }
 
 .add-to-cart {
-  border: 2px solid #FE5F1E;
+  border: 2px solid #4cd137;
   outline: none !important;
-  color: #FE5F1E;
+  color: #4cd137;
   transition: all 0.4s ease-in-out;
 }
 .add-to-cart:hover {
-  background: #FE5F1E;
+  background: #4cd137;
   border-color: #fff;
   color: #fff;
 }
 
 .btn-primary {
-  background: #FE5F1E;
+  background: #4cd137;
   transition: all 0.4s ease-in-out;
 }
 .btn-primary:hover {
-  background: #b23301;
+  background: #44bd32;
 }
 
 section.cart {
   background: #F8F8F8;
 }
 section.cart .amount {
-  color: #FE5F1E;
+  color: #4cd137;
 }
 
 section.login {
@@ -337,10 +351,10 @@ section.login {
   min-height: calc(100vh - 86px);
 }
 section.login a {
-  color: #FE5F1E;
+  color: #4cd137;
 }
 section.login a:hover {
-  color: #b23301;
+  color: #44bd32;
 }
 
 .noty_theme__mint {
@@ -349,7 +363,7 @@ section.login a:hover {
 }
 
 a.link {
-  color: #FE5F1E;
+  color: #4cd137;
 }
 
 section.status {
@@ -450,11 +464,11 @@ section.status {
 }
 
 .status-box ul li.current span {
-  color: #FE5F1E;
+  color: #4cd137;
 }
 
 .status-box ul li.current span:after {
-  background: #FE5F1E;
+  background: #4cd137;
 }
 
 .status-box ul li small {
