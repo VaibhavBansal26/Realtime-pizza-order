@@ -1,4 +1,3 @@
-
 require('dotenv').config()
 const express = require('express')
 
@@ -21,19 +20,19 @@ const Emitter = require('events')
 //const uri = 'mongodb+srv://V_Bansal:kritisanon14@cluster0.hljid.mongodb.net/pizza-app?retryWrites=true&w=majority'
 
 //MONGO DB CONNECTION
-mongoose.connect(process.env.MONGO_CONNECTION_URL,{
-    useNewUrlParser : true,
-    useCreateIndex:true,
-    useFindAndModify:false,
+mongoose.connect(process.env.MONGO_CONNECTION_URL, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
     useUnifiedTopology: true
 }).then(con => {
     console.log("Connection is established")
 })
 
 const connection = mongoose.connection;
-connection.once('open',() => {
+connection.once('open', () => {
     console.log("yeah connected... ");
-}).catch(err =>{
+}).catch(err => {
     console.log('Connection failed...')
 })
 
@@ -48,19 +47,21 @@ connection.once('open',() => {
 //Event Emitter
 const eventEmitter = new Emitter()
 //App binding
-app.set('eventEmitter',eventEmitter)
+app.set('eventEmitter', eventEmitter)
 
 
 //session
 app.use(session({
-    secret:process.env.COOKIE_SECRET,
-    resave:false,
-    store:MongoDbStore.create({
-        client:connection.getClient(),
-        mongoUrl:process.env.MONGO_CONNECTION_URL
+    secret: process.env.COOKIE_SECRET,
+    resave: false,
+    store: MongoDbStore.create({
+        client: connection.getClient(),
+        mongoUrl: process.env.MONGO_CONNECTION_URL
     }),
-    saveUninitialized:false,
-    cookie:{maxAge:1000*60*60*24}
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24
+    }
 }))
 
 //Passport config
@@ -72,10 +73,12 @@ app.use(passport.session())
 app.use(flash())
 //Assets
 app.use(express.static('public'))
-app.use(express.urlencoded({extended:false}))
+app.use(express.urlencoded({
+    extended: false
+}))
 app.use(express.json())
 //Global middleware
-app.use((req,res,next) => {
+app.use((req, res, next) => {
     res.locals.session = req.session
     res.locals.user = req.user
     next()
@@ -83,34 +86,34 @@ app.use((req,res,next) => {
 
 //Set Template Engine
 app.use(expressLayout)
-app.set('views',path.join(__dirname,'/resources/views'))
-app.set('view engine','ejs')
+app.set('views', path.join(__dirname, '/resources/views'))
+app.set('view engine', 'ejs')
 
 //Routes
 require('./routes/web')(app)
-app.use((req,res) =>{
+app.use((req, res) => {
     res.status(404).render('error/404')
 })
 
-const server = app.listen(PORT,() =>{
+const server = app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`)
 })
 
 //Socket
 
 const io = require('socket.io')(server)
-io.on('connection',(socket) =>{
+io.on('connection', (socket) => {
     console.log(socket.id)
-    socket.on('join',(orderId)=>{
+    socket.on('join', (orderId) => {
         console.log(orderId)
         socket.join(orderId)
     })
 })
 
-eventEmitter.on('orderUpdated',(data)=>{
-    io.to(`order_${data.id}`).emit('orderUpdated',data)
+eventEmitter.on('orderUpdated', (data) => {
+    io.to(`order_${data.id}`).emit('orderUpdated', data)
 })
 
-eventEmitter.on('orderPlaced',(data)=>{
-    io.to('adminRoom').emit('orderPlaced',data)
+eventEmitter.on('orderPlaced', (data) => {
+    io.to('adminRoom').emit('orderPlaced', data)
 })
